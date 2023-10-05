@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+
+    .nav-active {
+        @apply border-b-4 border-blue-700;
+    }
+}
