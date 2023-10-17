@@ -1,4 +1,4 @@
-function createBookCard() {
+function createBookCard(title, author, year) {
     const div = document.createElement('div');
     div.className = 'h-max w-full bg-white rounded-md flex md:flex-col md:w-72 md:h-[490px] hover:cursor-pointer hover:scale-105 duration-200 mb-3';
 
@@ -25,7 +25,7 @@ function createBookCard() {
 
     const h3 = document.createElement('h3');
     h3.className = 'text-[22px] font-medium';
-    h3.textContent = 'How To Learn Javascript';
+    h3.textContent = title;
 
     const p1 = document.createElement('p');
     p1.className = 'text-slate-600 font-medium';
@@ -35,10 +35,10 @@ function createBookCard() {
 
     const span = document.createElement('span');
     span.className = 'text-blue-500 font-semibold';
-    span.textContent = '2023';
+    span.textContent = year;
 
     // Tambahkan teks pada elemen paragraf
-    p1.textContent = 'Sandhika Galih ';
+    p1.textContent = author;
     p1.appendChild(br); // Tambahkan break line
     p1.appendChild(span); // Tambahkan span
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookself Apps</title>
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="src/style/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,7 @@
                 <div class="h-max w-full bg-white rounded-md flex md:flex-col md:w-72 md:h-[490px] hover:cursor-pointer hover:scale-105 duration-200 mb-3">
                     <aside class="flex justify-center items-center p-3">
                         <figure class="rounded-sm overflow-hidden">
-                            <img class="aspect-square h-32 md:h-full" src="img/book-default.jpeg" alt="book-cover">
+                            <img class="aspect-square h-32 md:h-full" src="src/img/book-default.jpeg" alt="book-cover">
                         </figure>
                     </aside>
                     <div class="h-full w-full py-5 pr-2 md:pl-4">
@@ -69,8 +69,43 @@
                 </div>
             </div>
 
+            <!-- form add buku -->
+            <div id="formAddBook" class="hidden h-max w-[80%] max-w-[500px] pb-10 bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md shadow-md">
+                <header>
+                    <h1 class="text-center py-5 text-2xl font-semibold">Tambah Buku</h1>
+                </header>
+                <div class="relative">
+                    <div id="closeFormBook" class="bg-red-600 text-white h-8 w-8 rounded-full text-center text-[22px] font-semibold flex justify-center items-center cursor-pointer absolute -top-[85px] -right-3">
+                        <span>x</span>
+                    </div>
+                    <div class="pl-8">
+                        <form id="bookform">
+                            <div class="mb-3">
+                                <label for="judulbuku">Judul Buku</label><br>
+                                <input id="judulbuku" type="text" placeholder="cth: harry potter" required class="text-sm py-2 px-3 border border-black shadow-sm rounded-md w-[90%] outline-sky-400 focus:border-none">
+                            </div>
+                            <div class="mb-3">
+                                <label for="author">Author</label><br>
+                                <input id="author" type="text" placeholder="cth: james" required class="text-sm py-2 px-3 border border-black shadow-sm rounded-md w-[90%] outline-sky-400">
+                            </div>
+                            <div class="mb-3">
+                                <label for="tahun">Tahun</label><br>
+                                <input id="tahun" type="number" placeholder="cth: 2023" required class="appearance-none text-sm py-2 px-3 border border-black shadow-sm rounded-md w-[90%] outline-sky-400">
+                            </div>
+                            <div class="p-2 flex items-center">
+                                <label id="isdoneread" class="pr-2">Sudah Selesai Membaca?</label>
+                                <input type="checkbox" id="isbookread" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
+                            </div>
+                            <div class="flex justify-center pt-5">
+                                <input type="submit" name="" id="booksubmit" value="Simpan" class="bg-sky-400 py-2 px-7 cursor-pointer rounded-md text-white shadow-md hover:bg-sky-500 duration-200">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <!-- add book button -->
-            <div class="bg-gradient-to-bl from-rose-700 to-sky-500 h-20 w-20 fixed z-50 rounded-full overflow-hidden right-5 bottom-8 cursor-pointer shadow-sm hover:scale-105 duration-200 hover:-rotate-90">
+            <div id="addBookBtn" class="bg-gradient-to-bl from-rose-700 to-sky-500 h-20 w-20 fixed z-50 rounded-full overflow-hidden right-5 bottom-8 cursor-pointer shadow-sm hover:scale-105 duration-200 hover:-rotate-90">
                 <div class="flex justify-center items-center h-full w-full">
                     <span class="font-medium text-[40px] text-white">+</span>
                 </div>
@@ -78,5 +113,5 @@
         </div>
     </main>
 </body>
-<script type="module" src="js/main.js"></script>
+<script type="module" src="src/js/main.js"></script>
 </html>
