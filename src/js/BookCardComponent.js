@@ -1,3 +1,5 @@
+const containerBookCard = document.getElementById("containerbookcard");
+
 function createBookCard(title, author, year) {
     const div = document.createElement('div');
     div.className = 'h-max w-full bg-white rounded-md flex md:flex-col md:w-72 md:h-[490px] hover:cursor-pointer hover:scale-105 duration-200 mb-3';
@@ -18,7 +20,7 @@ function createBookCard(title, author, year) {
     div.appendChild(aside);
 
     const contentDiv = document.createElement('div');
-    contentDiv.className = 'h-full w-full py-5 pr-2 md:pl-4';
+    contentDiv.className = 'h-full w-full py-5 pr-2 md:pl-4 md:flex md:flex-col md:justify-between';
 
     // Menambahkan section pertama
     const section1 = document.createElement('section');
@@ -60,7 +62,7 @@ function createBookCard(title, author, year) {
     div.appendChild(contentDiv);
 
     // Menggabungkan elemen ke dalam body
-    document.body.appendChild(div);
+    containerBookCard.appendChild(div);
 }
 
 export default createBookCard;

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookself Apps</title>
-    <link rel="stylesheet" href="src/style/style.css">
+    <link rel="stylesheet" href="style/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,27 +46,10 @@
         </nav>
     </header>
     <main>
-        <div class="h-screen w-full bg-slate-100 mt-1 pt-5">
-            <div class="w-11/12 h-64 m-auto">
+        <div class="min-h-screen w-full bg-slate-100 mt-1 pt-5">
+            <div id="containerbookcard" class="w-11/12 h-auto m-auto flex flex-col md:flex-row md:gap-4 md:flex-wrap md:w-full md:justify-center lg:justify-start lg:px-4">
                 <!-- book card -->
-                <div class="h-max w-full bg-white rounded-md flex md:flex-col md:w-72 md:h-[490px] hover:cursor-pointer hover:scale-105 duration-200 mb-3">
-                    <aside class="flex justify-center items-center p-3">
-                        <figure class="rounded-sm overflow-hidden">
-                            <img class="aspect-square h-32 md:h-full" src="src/img/book-default.jpeg" alt="book-cover">
-                        </figure>
-                    </aside>
-                    <div class="h-full w-full py-5 pr-2 md:pl-4">
-                        <section>
-                            <h3 class="text-[22px] font-medium">How To Learn Javascript</h3>
-                            <p class="text-slate-600 font-medium">Sandhika Galih <br><span class="text-blue-500 font-semibold">2023</span></p>
-                        </section>
-                        <section class="flex justify-end">
-                            <div>
-                                <button class="text-white p-2 rounded-md bg-gradient-to-br from-blue-600 to-sky-400 mr-3">Selesai Dibaca</button>
-                            </div>
-                        </section>
-                    </div>
-                </div>
+                
             </div>
 
             <!-- form add buku -->
@@ -113,5 +96,5 @@
         </div>
     </main>
 </body>
-<script type="module" src="src/js/main.js"></script>
+<script type="module" src="js/main.js"></script>
 </html>
