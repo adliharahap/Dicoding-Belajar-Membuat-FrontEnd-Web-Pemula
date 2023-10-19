@@ -34,6 +34,53 @@ closeFormBook.addEventListener("click", (e) => {
     ShowFormBook.style.display = "block";
 });
 
+// fungsi untuk membuat buku selesai dibaca
+function bookDoneReadBtn() {
+    const cardbookbtn = document.querySelectorAll(".cardbook");
+
+    cardbookbtn.forEach(button => {
+        button.addEventListener("click",function(event) {
+            const getData = localStorage.getItem("databuku");
+            const databuku = JSON.parse(getData);
+
+            const findBookId = button.id;
+            const foundBook = databuku.find(book => String(book.id) === findBookId);
+            if (foundBook) {
+                foundBook.isComplete = true;
+                containerBookCard.innerHTML = '';
+                // console.log("Buku ditemukan dan isComplete diubah menjadi true:", foundBook);
+                localStorage.setItem("databuku", JSON.stringify(databuku));
+                formSubmited();
+            } else {
+                console.log("Buku tidak ditemukan");
+            }
+        });
+    });
+}
+
+// fungsi untuk mengembalikan buku ke belum dibaca
+function BooknotReadBtn() {
+    const cardbookbtn = document.querySelectorAll(".cardbook");
+
+    cardbookbtn.forEach(button => {
+        button.addEventListener("click",function(e) {
+            const getData = localStorage.getItem("databuku");
+            const databuku = JSON.parse(getData);
+
+            const findBookId = button.id;
+            const foundBook = databuku.find(book => String(book.id) === findBookId);
+            if (foundBook) {
+                foundBook.isComplete = false;
+                containerBookCard.innerHTML = '';
+                // console.log("Buku ditemukan dan isComplete diubah menjadi false:", foundBook);
+                localStorage.setItem("databuku", JSON.stringify(databuku));
+                formSubmited();
+            } else {
+                console.log("Buku tidak ditemukan");
+            }
+        });
+    });
+}
 
 // function melakukan perulangan ke book card yang belum dibaca ketika halaman pertama kali dimuat
 import createBookCard from "./BookCardComponent.js";
@@ -47,12 +94,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
         const mappingBook =  BookData.map(book => {
 
             if(!book.isComplete) {
-                createBookCard(book.title, book.author, book.year)
+                createBookCard(book.title, book.author, book.year, book.isComplete, book.id);
             }
         });
     } else {
         console.log("data kosong");
     }
+
+    bookDoneReadBtn();
 });
 
 // membuat funnction ketika navbar buku sudah selesai dibaca menampilkan buku yang sudah di baca
@@ -69,7 +118,7 @@ function showBukuSlsDibaca() {
         if (BookData && BookData.length) {
             const mappingBook = BookData.map((book) => {
                 if (book.isComplete) {
-                createBookCard(book.title, book.author, book.year);
+                createBookCard(book.title, book.author, book.year, book.isComplete, book.id);
                 }
             });
 
@@ -79,6 +128,9 @@ function showBukuSlsDibaca() {
         } else {
             console.log("data kosong");
         }
+
+        // function mengupdate data buku menjadi dibaca ulang
+        BooknotReadBtn();
     }
 }
 
@@ -95,7 +147,7 @@ function showBukuBlmDibaca() {
         if (BookData && BookData.length) {
             const mappingBook = BookData.map((book) => {
                 if (!book.isComplete) {
-                createBookCard(book.title, book.author, book.year);
+                createBookCard(book.title, book.author, book.year, book.isComplete, book.id);
                 }
             });
 
@@ -105,6 +157,9 @@ function showBukuBlmDibaca() {
         } else {
             console.log("data kosong");
         }
+
+        // function mengupdate data buku menjadi selesai dibaca
+        bookDoneReadBtn();
     }
 }
 

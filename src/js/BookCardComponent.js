@@ -1,6 +1,6 @@
 const containerBookCard = document.getElementById("containerbookcard");
 
-function createBookCard(title, author, year) {
+function createBookCard(title, author, year, isComplete, id) {
     const div = document.createElement('div');
     div.className = 'h-max w-full bg-white rounded-md flex md:flex-col md:w-72 md:h-[490px] hover:cursor-pointer hover:scale-105 duration-200 mb-3';
 
@@ -26,11 +26,11 @@ function createBookCard(title, author, year) {
     const section1 = document.createElement('section');
 
     const h3 = document.createElement('h3');
-    h3.className = 'text-[22px] font-medium';
+    h3.className = 'text-[22px] font-medium line-clamp-2';
     h3.textContent = title;
 
     const p1 = document.createElement('p');
-    p1.className = 'text-slate-600 font-medium';
+    p1.className = 'text-slate-600 font-medium line-clamp-1';
 
     // Tambahkan break line
     const br = document.createElement('br');
@@ -42,18 +42,23 @@ function createBookCard(title, author, year) {
     // Tambahkan teks pada elemen paragraf
     p1.textContent = author;
     p1.appendChild(br); // Tambahkan break line
-    p1.appendChild(span); // Tambahkan span
 
     section1.appendChild(h3);
     section1.appendChild(p1);
+    section1.appendChild(span); // Tambahkan span
 
     // Menambahkan section kedua
     const section2 = document.createElement('section');
     section2.className = 'flex justify-end';
     const innerDiv = document.createElement('div');
     const button = document.createElement('button');
-    button.className = 'text-white p-2 rounded-md bg-gradient-to-br from-blue-600 to-sky-400 mr-3';
-    button.textContent = 'Selesai Dibaca';
+    button.id = id;
+    button.className = 'text-white p-2 rounded-md bg-gradient-to-br from-blue-600 to-sky-400 mr-3 cardbook';
+    if(!isComplete) {
+        button.textContent = 'Selesai Dibaca';
+    }else {
+        button.textContent = 'Baca Ulang';
+    }
     innerDiv.appendChild(button);
     section2.appendChild(innerDiv);
 
