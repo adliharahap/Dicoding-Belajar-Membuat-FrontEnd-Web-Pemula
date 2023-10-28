@@ -7,6 +7,8 @@ const formBook = document.getElementById("formAddBook");
 const closeFormBook = document.getElementById('closeFormBook');
 const ShowFormBook = document.getElementById("addBookBtn");
 const isDoneRead = document.getElementById("isbookread");
+const DeleteCardBtn = document.getElementById("deletecardbtn");
+const DeleteCardChecked = document.getElementById("deletecardchecked");
 
 // ketika navbar buku sls dibaca di klik
 BukuSlsDibaca.addEventListener("click", (e) => {
@@ -82,6 +84,57 @@ function BooknotReadBtn() {
     });
 }
 
+// function menghapus bookcard
+function DeleteCardBook() {
+    const delButton = document.querySelectorAll(".delbtn");
+    DeleteCardChecked.checked = 'true';
+    DeleteCardBtn.classList.toggle('activebtn');
+
+    if(DeleteCardBtn.classList.contains("activebtn")) {
+        delButton.forEach((button) => {
+            button.classList.toggle("hidden");
+        });
+    }else {
+        delButton.forEach((button) => {
+            button.classList.toggle("hidden");
+        });
+    }
+    
+}
+
+function deletefunct() {
+    const delButton = document.querySelectorAll(".delbtn");
+
+    delButton.forEach(button => {
+        button.addEventListener("click",function(e) {
+            const getData = localStorage.getItem("databuku");
+            let databuku = [];
+
+            if (getData) {
+                databuku = JSON.parse(getData);
+            }
+
+            const findBookId = button.id;
+            const foundIndex = databuku.findIndex(book => String(book.id) === findBookId);
+
+            if (foundIndex !== -1) {
+                // Menghapus buku dari array databuku
+                databuku.splice(foundIndex, 1);
+
+                // Menyimpan array databuku yang diperbarui ke local storage
+                localStorage.setItem("databuku", JSON.stringify(databuku));
+
+                // Memanggil fungsi untuk mengupdate tampilan atau operasi lain
+                formSubmited();
+            } else {
+                console.log("Buku tidak ditemukan");
+            }
+        });
+    });
+}
+
+DeleteCardBtn.addEventListener("click",DeleteCardBook);
+
 // function melakukan perulangan ke book card yang belum dibaca ketika halaman pertama kali dimuat
 import createBookCard from "./BookCardComponent.js";
 
@@ -102,9 +155,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     bookDoneReadBtn();
+    deletefunct();
 });
 
-// membuat funnction ketika navbar buku sudah selesai dibaca menampilkan buku yang sudah di baca
+// membuat function ketika navbar buku sudah selesai dibaca menampilkan buku yang sudah di baca
 let isComponentAdded = false;
 function showBukuSlsDibaca() {
     isDoneRead.checked = true;
@@ -131,6 +185,7 @@ function showBukuSlsDibaca() {
 
         // function mengupdate data buku menjadi dibaca ulang
         BooknotReadBtn();
+        deletefunct();
     }
 }
 
@@ -160,6 +215,7 @@ function showBukuBlmDibaca() {
 
         // function mengupdate data buku menjadi selesai dibaca
         bookDoneReadBtn();
+        deletefunct();
     }
 }
 

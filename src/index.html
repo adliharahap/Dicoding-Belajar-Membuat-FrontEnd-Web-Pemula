@@ -46,7 +46,20 @@
         </nav>
     </header>
     <main>
-        <div class="min-h-screen w-full bg-slate-100 mt-1 pt-5">
+        <div class="min-h-screen w-full bg-slate-100 mt-1">
+            <div class="h-14 w-full flex justify-end pr-5">
+                <div id="deletecardbtn" class="bg-slate-50 w-max h-10 px-5 mt-1.5 flex justify-center items-center rounded-full cursor-pointer hover:bg-slate-300 duration-300 shadow-sm">
+                    <section class="flex justify-center">
+                        <figure>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="red"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                        </figure>
+                        <section class="flex relative">
+                            <input type="checkbox" name="" id="deletecardchecked" class="absolute opacity-0">
+                            <p class="font-medium">Delete</p>
+                        </section>
+                    </section>
+                </div>
+            </div>
             <div id="containerbookcard" class="w-11/12 h-auto m-auto flex flex-col md:flex-row md:gap-4 md:flex-wrap md:w-full md:justify-center lg:justify-start lg:px-4">
                 <!-- book card -->
                 
