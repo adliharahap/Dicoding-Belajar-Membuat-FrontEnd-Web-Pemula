@@ -95,6 +95,6 @@ function createBookCard(title, author, year, isComplete, id) {
     div.appendChild(divabs);
     divabs.classList.add("delbtn");
     divabs.id = id;
-    }
+}
 
 export default createBookCard;

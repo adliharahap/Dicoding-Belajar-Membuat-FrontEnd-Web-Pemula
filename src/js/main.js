@@ -1,4 +1,6 @@
-
+const NavbarContainer = document.getElementById("navcontainer");
+const bookNavbar = document.getElementById("navbarbook");
+const ContainerBody = document.getElementById("containerbody");
 const BukuBlmDibaca = document.getElementById("booknotread");
 const BukuSlsDibaca = document.getElementById("bookdoneread");
 const bookForm = document.getElementById("bookform");
@@ -9,6 +11,8 @@ const ShowFormBook = document.getElementById("addBookBtn");
 const isDoneRead = document.getElementById("isbookread");
 const DeleteCardBtn = document.getElementById("deletecardbtn");
 const DeleteCardChecked = document.getElementById("deletecardchecked");
+const SearchInput = document.getElementById("search-book");
+const clearSearchInput =  document.getElementById("deleteinput");
 
 // ketika navbar buku sls dibaca di klik
 BukuSlsDibaca.addEventListener("click", (e) => {
@@ -258,4 +262,72 @@ bookForm.addEventListener("submit", function (event) {
     event.preventDefault();
     formAddBook();
     formSubmited();
+});
+
+import SearchBookComponent from "./SearchBookComponent.js";
+
+// Function search book
+function searchBook() {
+    const inputValue = SearchInput.value;
+
+    if (inputValue.length >= 1) {
+        // Mengatur style komponen
+        bookNavbar.style.display = "none";
+        containerBookCard.innerHTML = '';
+        clearSearchInput.style.display = "inline";
+        NavbarContainer.classList.add("pb-5");
+        DeleteCardBtn.classList.add("hidden");
+
+        const GetBooks = JSON.parse(localStorage.getItem("databuku") || []);
+
+        // Periksa apakah data buku tersedia
+        if (GetBooks && GetBooks.length > 0) {
+            const searchResults = SearchBooks(inputValue, GetBooks);
+
+            // Memanggil komponen SearchBookComponent jika terdapat hasil pencarian
+            if (searchResults.length > 0) {
+
+                for (const book of searchResults) {
+                    SearchBookComponent(book.title, book.author, book.year, book.isComplete, book.id);
+                }
+
+            }else {
+                console.log("buku anda tidak ditemukan");
+            }
+        }else {
+            console.log("buku anda tidak ditemukan");
+        }
+    } else {
+        formSubmited();
+        bookNavbar.style.display = "block";
+        ContainerBody.style.display = "block";
+        clearSearchInput.style.display = "none";
+        DeleteCardBtn.classList.remove("hidden");
+    }
+}
+
+// Fungsi pencarian buku
+function SearchBooks(keyword, books) {
+    const searchResults = [];
+
+    for (const book of books) {
+        if (
+            book.title.toLowerCase().includes(keyword.toLowerCase()) ||
+            book.author.toLowerCase().includes(keyword.toLowerCase()) ||
+            book.year.toLowerCase().includes(keyword.toLowerCase())
+        ) {
+            searchResults.push(book);
+        }
+    }
+
+    return searchResults;
+}
+
+SearchInput.addEventListener("input", searchBook);
+
+clearSearchInput.addEventListener("click", function (event) {
+SearchInput.value = "";
+if (SearchInput.value === "") {
+    searchBook();
+}
 });
