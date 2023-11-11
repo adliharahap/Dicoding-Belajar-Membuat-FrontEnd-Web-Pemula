@@ -13,6 +13,7 @@ const DeleteCardBtn = document.getElementById("deletecardbtn");
 const DeleteCardChecked = document.getElementById("deletecardchecked");
 const SearchInput = document.getElementById("search-book");
 const clearSearchInput =  document.getElementById("deleteinput");
+const overlay = document.getElementById("overlay");
 
 // ketika navbar buku sls dibaca di klik
 BukuSlsDibaca.addEventListener("click", (e) => {
@@ -57,6 +58,21 @@ function bookDoneReadBtn() {
                 // console.log("Buku ditemukan dan isComplete diubah menjadi true:", foundBook);
                 localStorage.setItem("databuku", JSON.stringify(databuku));
                 formSubmited();
+
+                // menampilkan pesan pemberitahuan bahwa buku berhasil selesai di baca
+                messageDescription.textContent = "Buku telah dipindahkan ke Selesai Dibaca";
+                messageimg.src = "icon/congrats.gif";
+                messageimg.classList.add("h-48", "w-48");
+                messageNotification.classList.remove("hidden");
+                overlay.classList.remove("hidden");
+
+                setTimeout(() => {
+                    messageNotification.classList.add("hidden");
+                    messageimg.src = "icon/centang.gif";
+                    messageimg.classList = [];
+                    messageimg.classList.add("h-24", "w-24");
+                    overlay.classList.add("hidden");
+                }, 5000);
             } else {
                 console.log("Buku tidak ditemukan");
             }
@@ -81,6 +97,21 @@ function BooknotReadBtn() {
                 // console.log("Buku ditemukan dan isComplete diubah menjadi false:", foundBook);
                 localStorage.setItem("databuku", JSON.stringify(databuku));
                 formSubmited();
+
+                // menampilkan pesan pemberitahuan bahwa buku berhasil dipindahkan ke belum di baca
+                messageDescription.textContent = "Buku telah dipindahkan ke Belum Dibaca";
+                messageimg.src = "icon/repeat.gif";
+                messageimg.classList.add("h-48", "w-48");
+                messageNotification.classList.remove("hidden");
+                overlay.classList.remove("hidden");
+
+                setTimeout(() => {
+                    messageNotification.classList.add("hidden");
+                    messageimg.src = "icon/centang.gif";
+                    messageimg.classList = [];
+                    messageimg.classList.add("h-24", "w-24");
+                    overlay.classList.add("hidden");
+                }, 2000);
             } else {
                 console.log("Buku tidak ditemukan");
             }
@@ -130,6 +161,21 @@ function deletefunct() {
 
                 // Memanggil fungsi untuk mengupdate tampilan atau operasi lain
                 formSubmited();
+
+                // menampilkan pesan pemberitahuan bahwa buku berhasil di hapus
+                messageDescription.textContent = "Buku Berhasil Di Hapus";
+                messageimg.src = "icon/delete2.gif";
+                messageimg.classList.add("h-40", "w-40");
+                messageNotification.classList.remove("hidden");
+                overlay.classList.remove("hidden");
+
+                setTimeout(() => {
+                    messageNotification.classList.add("hidden");
+                    messageimg.src = "icon/centang.gif";
+                    messageimg.classList = [];
+                    messageimg.classList.add("h-24", "w-24");
+                    overlay.classList.add("hidden");
+                }, 3000);
             } else {
                 console.log("Buku tidak ditemukan");
             }
@@ -139,8 +185,15 @@ function deletefunct() {
 
 DeleteCardBtn.addEventListener("click",DeleteCardBook);
 
-// function melakukan perulangan ke book card yang belum dibaca ketika halaman pertama kali dimuat
 import createBookCard from "./BookCardComponent.js";
+
+// pemanggilan komponent notification message
+import MessageNotif from "./MessageNotification.js";
+MessageNotif();
+const messageNotification = document.getElementById("notifmsg");
+const messageDescription = document.getElementById("descriptionmsg");
+const messageimg = document.getElementById("messageimg");
+console.log(messageimg);
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
@@ -258,13 +311,23 @@ function formSubmited() {
 
 // event listener menambahkan data buku di form
 import formAddBook from "./bookForm.js";
+
 bookForm.addEventListener("submit", function (event) {
     event.preventDefault();
     formAddBook();
     formSubmited();
+    messageDescription.textContent = "Buku Berhasil Di Simpan";
+    messageNotification.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+
+    setTimeout(() => {
+        messageNotification.classList.add("hidden");
+        overlay.classList.add("hidden");
+    }, 2000);
 });
 
 import SearchBookComponent from "./SearchBookComponent.js";
+
 
 // Function search book
 function searchBook() {
@@ -274,6 +337,7 @@ function searchBook() {
         // Mengatur style komponen
         bookNavbar.style.display = "none";
         containerBookCard.innerHTML = '';
+        containerBookCard.classList.add("gap-3");
         clearSearchInput.style.display = "inline";
         NavbarContainer.classList.add("pb-5");
         DeleteCardBtn.classList.add("hidden");
@@ -299,10 +363,12 @@ function searchBook() {
         }
     } else {
         formSubmited();
+        containerBookCard.classList.remove("gap-3");
         bookNavbar.style.display = "block";
         ContainerBody.style.display = "block";
         clearSearchInput.style.display = "none";
         DeleteCardBtn.classList.remove("hidden");
+        NavbarContainer.classList.remove("pb-5");
     }
 }
 
