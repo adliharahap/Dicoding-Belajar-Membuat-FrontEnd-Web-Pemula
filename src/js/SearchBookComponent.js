@@ -16,7 +16,7 @@ function SearchBookComponent(title, author, year, isComplete, id) {
         "w-32 h-36 flex justify-center items-center rounded-sm overflow-hidden";
 
     const img = document.createElement("img");
-    img.src = "./img/book-default.jpeg";
+    img.src = "src/img/book-default.jpeg";
     img.className = "object-cover h-36";
     img.alt = "bookcover";
 

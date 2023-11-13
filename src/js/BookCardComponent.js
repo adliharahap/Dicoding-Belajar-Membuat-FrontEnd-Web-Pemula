@@ -2,7 +2,7 @@ const containerBookCard = document.getElementById("containerbookcard");
 
 function createBookCard(title, author, year, isComplete, id) {
     const div = document.createElement('div');
-    div.className = 'relative overflow-hidden h-max w-full bg-white rounded-md flex md:flex-col md:w-72 md:h-[490px] hover:cursor-pointer hover:scale-105 duration-200 mb-3';
+    div.className = 'relative overflow-hidden h-max w-full bg-white rounded-md flex md:flex-col md:w-72 md:h-[490px] hover:cursor-pointer hover:scale-105 duration-200 mb-3 shadow-md';
 
     const aside = document.createElement('aside');
     aside.className = 'flex justify-center items-center p-3';
@@ -12,7 +12,7 @@ function createBookCard(title, author, year, isComplete, id) {
 
     const img = document.createElement('img');
     img.className = 'aspect-square h-32 md:h-full';
-    img.src = 'img/book-default.jpeg';
+    img.src = 'src/img/book-default.jpeg';
     img.alt = 'book-cover';
 
     figure.appendChild(img);

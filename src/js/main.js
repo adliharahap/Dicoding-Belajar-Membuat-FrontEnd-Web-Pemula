@@ -71,14 +71,14 @@ function bookDoneReadBtn() {
 
                 // menampilkan pesan pemberitahuan bahwa buku berhasil selesai di baca
                 messageDescription.textContent = "Buku telah dipindahkan ke Selesai Dibaca";
-                messageimg.src = "icon/congrats.gif";
+                messageimg.src = "src/icon/congrats.gif";
                 messageimg.classList.add("h-48", "w-48");
                 messageNotification.classList.remove("hidden");
                 overlay.classList.remove("hidden");
 
                 setTimeout(() => {
                     messageNotification.classList.add("hidden");
-                    messageimg.src = "icon/centang.gif";
+                    messageimg.src = "src/icon/centang.gif";
                     messageimg.classList = [];
                     messageimg.classList.add("h-24", "w-24");
                     overlay.classList.add("hidden");
@@ -110,14 +110,14 @@ function BooknotReadBtn() {
 
                 // menampilkan pesan pemberitahuan bahwa buku berhasil dipindahkan ke belum di baca
                 messageDescription.textContent = "Buku telah dipindahkan ke Belum Dibaca";
-                messageimg.src = "icon/repeat.gif";
+                messageimg.src = "src/icon/repeat.gif";
                 messageimg.classList.add("h-48", "w-48");
                 messageNotification.classList.remove("hidden");
                 overlay.classList.remove("hidden");
 
                 setTimeout(() => {
                     messageNotification.classList.add("hidden");
-                    messageimg.src = "icon/centang.gif";
+                    messageimg.src = "src/icon/centang.gif";
                     messageimg.classList = [];
                     messageimg.classList.add("h-24", "w-24");
                     overlay.classList.add("hidden");
@@ -174,14 +174,14 @@ function deletefunct() {
 
                 // menampilkan pesan pemberitahuan bahwa buku berhasil di hapus
                 messageDescription.textContent = "Buku Berhasil Di Hapus";
-                messageimg.src = "icon/delete2.gif";
+                messageimg.src = "src/icon/delete2.gif";
                 messageimg.classList.add("h-40", "w-40");
                 messageNotification.classList.remove("hidden");
                 overlay.classList.remove("hidden");
 
                 setTimeout(() => {
                     messageNotification.classList.add("hidden");
-                    messageimg.src = "icon/centang.gif";
+                    messageimg.src = "src/icon/centang.gif";
                     messageimg.classList = [];
                     messageimg.classList.add("h-24", "w-24");
                     overlay.classList.add("hidden");
@@ -440,7 +440,7 @@ function SearchBooksBtn() {
                     localStorage.setItem("databuku", JSON.stringify(databuku));
 
                     messageDescription.textContent = "Buku telah dipindahkan ke Selesai Dibaca";
-                    messageimg.src = "icon/congrats.gif";
+                    messageimg.src = "src/icon/congrats.gif";
                     messageimg.classList.add("h-48", "w-48");
                     messageNotification.classList.remove("hidden");
                     overlay.classList.remove("hidden");
@@ -453,7 +453,7 @@ function SearchBooksBtn() {
                         // mereset kembali message notification
                         setTimeout(() => {
                             messageNotification.classList.add("hidden");
-                            messageimg.src = "icon/centang.gif";
+                            messageimg.src = "src/icon/centang.gif";
                             messageimg.classList = [];
                             messageimg.classList.add("h-24", "w-24");
                             overlay.classList.add("hidden");
@@ -484,7 +484,7 @@ function SearchBooksBtn() {
                     localStorage.setItem("databuku", JSON.stringify(databuku));
 
                     messageDescription.textContent = "Buku telah dipindahkan ke Belum Dibaca";
-                    messageimg.src = "icon/repeat.gif";
+                    messageimg.src = "src/icon/repeat.gif";
                     messageimg.classList.add("h-48", "w-48");
                     messageNotification.classList.remove("hidden");
                     overlay.classList.remove("hidden");
@@ -497,7 +497,7 @@ function SearchBooksBtn() {
                         // mereset kembali message notification
                         setTimeout(() => {
                             messageNotification.classList.add("hidden");
-                            messageimg.src = "icon/centang.gif";
+                            messageimg.src = "src/icon/centang.gif";
                             messageimg.classList = [];
                             messageimg.classList.add("h-24", "w-24");
                             overlay.classList.add("hidden");
@@ -542,7 +542,7 @@ function SearchBooksBtn() {
     
                     // menampilkan pesan pemberitahuan bahwa buku berhasil di hapus
                     messageDescription.textContent = "Buku Berhasil Di Hapus";
-                    messageimg.src = "icon/delete2.gif";
+                    messageimg.src = "src/icon/delete2.gif";
                     messageimg.classList.add("h-40", "w-40");
                     messageNotification.classList.remove("hidden");
                     overlay.classList.remove("hidden");
@@ -555,7 +555,7 @@ function SearchBooksBtn() {
                         // mereset kembali message notification
                         setTimeout(() => {
                             messageNotification.classList.add("hidden");
-                            messageimg.src = "icon/centang.gif";
+                            messageimg.src = "src/icon/centang.gif";
                             messageimg.classList = [];
                             messageimg.classList.add("h-24", "w-24");
                             overlay.classList.add("hidden");

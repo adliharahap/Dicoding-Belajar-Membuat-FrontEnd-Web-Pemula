@@ -18,7 +18,7 @@ function MessageNotif() {
     img.id = 'messageimg';
     img.alt = '';
     img.className = 'h-24 w-24';
-    img.src = 'icon/centang.gif';
+    img.src = 'src/icon/centang.gif';
 
     // Gabungkan elemen-elemen
     figure.appendChild(img);
