@@ -217,10 +217,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }
         });
     } else {
-        console.log("data kosong");
         BookEmpty();
     }
 
+    showBukuBlmDibaca();
     bookDoneReadBtn();
     deletefunct();
 });
@@ -244,14 +244,12 @@ function showBukuSlsDibaca() {
                     }
                 });
             } else {
-                console.log('Semua buku telah selesai dibaca atau tidak ada buku');
                 BookEmpty();
             }
             // Setel flag menjadi true setelah komponen ditambahkan
             isComponentAdded = true;
             isComponentAdded2 = false;
         } else {
-            console.log("data kosong");
             BookEmpty();
         }
 
@@ -279,7 +277,6 @@ function showBukuBlmDibaca() {
                     }
                 });
             } else {
-                console.log('Semua buku telah selesai dibaca atau tidak ada buku');
                 BookEmpty();
             }
 
@@ -287,7 +284,6 @@ function showBukuBlmDibaca() {
             isComponentAdded2 = true;
             isComponentAdded = false;
         } else {
-            console.log("data kosong");
             BookEmpty();
         }
 

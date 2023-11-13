@@ -3,7 +3,7 @@ const containerBookCard = document.getElementById("containerbookcard");
 function SearchBookComponent(title, author, year, isComplete, id) {
     const div = document.createElement("div");
     div.className =
-        "h-52 sm:h-40 w-full bg-white m-auto rounded-md shadow-sm overflow-hidden";
+        "h-auto pb-2 sm:pb-0 sm:h-40 w-full bg-white m-auto rounded-md shadow-sm overflow-hidden";
 
     const innerDiv = document.createElement("div");
     innerDiv.className = "flex items-center justify-start";
@@ -47,16 +47,15 @@ function SearchBookComponent(title, author, year, isComplete, id) {
     section1.appendChild(pYear);
 
     const section2 = document.createElement("section");
+    section2.className = "flex flex-col";
     const pStatus = document.createElement("p");
     pStatus.textContent = "Status : ";
     const spanStatus = document.createElement("span");
-    // spanStatus.className = "bg-green-500 p-1.5 shadow-sm rounded-sm text-white";
-    // spanStatus.textContent = isComplete;
     if(!isComplete) {
-        spanStatus.className = "bg-red-600 p-1.5 shadow-sm rounded-sm text-white";
+        spanStatus.className = "bg-red-600 p-1.5 shadow-sm rounded-sm text-white inline-block sm:inline";
         spanStatus.textContent = "Belum Dibaca";
     }else {
-        spanStatus.className = "bg-green-500 p-1.5 shadow-sm rounded-sm text-white";
+        spanStatus.className = "bg-green-500 p-1.5 shadow-sm rounded-sm text-white inline-block sm:inline";
         spanStatus.textContent = "Selesai Dibaca";
     }
 
