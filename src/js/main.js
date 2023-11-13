@@ -403,7 +403,7 @@ function SearchBooks(keyword, books) {
         if (
             book.title.toLowerCase().includes(keyword.toLowerCase()) ||
             book.author.toLowerCase().includes(keyword.toLowerCase()) ||
-            book.year.toLowerCase().includes(keyword.toLowerCase())
+            book.year.toString().toLowerCase().includes(keyword.toLowerCase())
         ) {
             searchResults.push(book);
         }

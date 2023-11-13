@@ -13,12 +13,15 @@ const formAddBook = () => {
         }
     }
 
+    // mengkonversi tipe data year ke number
+    let YearToNum = parseInt(TahunBukuValue);
+
     const getBookData = [
         {
             id: +new Date(),
             title: JudulBukuValue,
             author: AuthorBukuValue,
-            year: TahunBukuValue,
+            year: YearToNum,
             isComplete: isComplete(),
         }
     ];
