@@ -14,6 +14,8 @@ const DeleteCardChecked = document.getElementById("deletecardchecked");
 const SearchInput = document.getElementById("search-book");
 const clearSearchInput =  document.getElementById("deleteinput");
 const overlay = document.getElementById("overlay");
+const bookNotFound = document.getElementById("booknotfound");
+const BookValue = document.getElementById("bookresult");
 
 // ketika navbar buku sls dibaca di klik
 BukuSlsDibaca.addEventListener("click", (e) => {
@@ -193,7 +195,6 @@ MessageNotif();
 const messageNotification = document.getElementById("notifmsg");
 const messageDescription = document.getElementById("descriptionmsg");
 const messageimg = document.getElementById("messageimg");
-console.log(messageimg);
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
@@ -328,10 +329,16 @@ bookForm.addEventListener("submit", function (event) {
 
 import SearchBookComponent from "./SearchBookComponent.js";
 
-
 // Function search book
 function searchBook() {
     const inputValue = SearchInput.value;
+
+    function BookNotFoundMessage(value) {
+        BookValue.textContent = value;
+        const bookcomponent = bookNotFound.outerHTML;
+        containerBookCard.innerHTML = bookcomponent;
+        bookNotFound.classList.remove("hidden");
+    }
 
     if (inputValue.length >= 1) {
         // Mengatur style komponen
@@ -350,16 +357,15 @@ function searchBook() {
 
             // Memanggil komponen SearchBookComponent jika terdapat hasil pencarian
             if (searchResults.length > 0) {
-
-                for (const book of searchResults) {
-                    SearchBookComponent(book.title, book.author, book.year, book.isComplete, book.id);
-                }
-
+                const bookComponents = searchResults.map(book => {
+                    return SearchBookComponent(book.title, book.author, book.year, book.isComplete, book.id);
+                });
+                SearchBooksBtn();
             }else {
-                console.log("buku anda tidak ditemukan");
+                BookNotFoundMessage(inputValue);
             }
         }else {
-            console.log("buku anda tidak ditemukan");
+            BookNotFoundMessage(inputValue);
         }
     } else {
         formSubmited();
@@ -397,3 +403,163 @@ if (SearchInput.value === "") {
     searchBook();
 }
 });
+
+// function memindahkan buku ke selesai dibaca / baca ulang di pencarian buku
+function SearchBooksBtn() {
+    const cardbookbtn = document.querySelectorAll(".cardbook");
+    const delButton = document.querySelectorAll(".delbtn");
+
+    cardbookbtn.forEach(button => {
+        button.addEventListener("click",function(event) {
+            if (button.textContent === "Selesai Dibaca") {
+                const getData = localStorage.getItem("databuku");
+                const databuku = JSON.parse(getData);
+
+                const findBookId = button.id;
+                const foundBook = databuku.find(book => String(book.id) === findBookId);
+
+                if (foundBook) {
+                    foundBook.isComplete = true;
+                    localStorage.setItem("databuku", JSON.stringify(databuku));
+
+                    messageDescription.textContent = "Buku telah dipindahkan ke Selesai Dibaca";
+                    messageimg.src = "icon/congrats.gif";
+                    messageimg.classList.add("h-48", "w-48");
+                    messageNotification.classList.remove("hidden");
+                    overlay.classList.remove("hidden");
+
+                    function delay(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+                    
+                    async function DelayRefresh() {
+                        // mereset kembali message notification
+                        setTimeout(() => {
+                            messageNotification.classList.add("hidden");
+                            messageimg.src = "icon/centang.gif";
+                            messageimg.classList = [];
+                            messageimg.classList.add("h-24", "w-24");
+                            overlay.classList.add("hidden");
+                        }, 5000);
+                    
+                        // Menunggu 5 detik menggunakan async/await
+                        await delay(5000);
+                        
+                        SearchInput.value = "";
+                        if (SearchInput.value === "") {
+                            searchBook();
+                        }
+                    }
+                    
+                    DelayRefresh();
+                } else {
+                    console.log("Buku tidak ditemukan");
+                }
+            } else {
+                const getData = localStorage.getItem("databuku");
+                const databuku = JSON.parse(getData);
+
+                const findBookId = button.id;
+                const foundBook = databuku.find(book => String(book.id) === findBookId);
+
+                if (foundBook) {
+                    foundBook.isComplete = false;
+                    localStorage.setItem("databuku", JSON.stringify(databuku));
+
+                    messageDescription.textContent = "Buku telah dipindahkan ke Belum Dibaca";
+                    messageimg.src = "icon/repeat.gif";
+                    messageimg.classList.add("h-48", "w-48");
+                    messageNotification.classList.remove("hidden");
+                    overlay.classList.remove("hidden");
+
+                    function delay(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+                    
+                    async function DelayRefresh() {
+                        // mereset kembali message notification
+                        setTimeout(() => {
+                            messageNotification.classList.add("hidden");
+                            messageimg.src = "icon/centang.gif";
+                            messageimg.classList = [];
+                            messageimg.classList.add("h-24", "w-24");
+                            overlay.classList.add("hidden");
+                        }, 2000);
+                    
+                        // Menunggu 2 detik menggunakan async/await
+                        await delay(2000);
+                        
+                        SearchInput.value = "";
+                        if (SearchInput.value === "") {
+                            searchBook();
+                        }
+                    }
+                    
+                    DelayRefresh();
+                } else {
+                    console.log("Buku tidak ditemukan");
+                }
+            }
+        });
+    });
+
+    function SearchDeleteBtn() {
+        delButton.forEach(button => {
+            button.addEventListener("click",function(e) {
+                const getData = localStorage.getItem("databuku");
+                let databuku = [];
+    
+                if (getData) {
+                    databuku = JSON.parse(getData);
+                }
+    
+                const findBookId = button.id;
+                const foundIndex = databuku.findIndex(book => String(book.id) === findBookId);
+    
+                if (foundIndex !== -1) {
+                    // Menghapus buku dari array databuku
+                    databuku.splice(foundIndex, 1);
+    
+                    // Menyimpan array databuku yang diperbarui ke local storage
+                    localStorage.setItem("databuku", JSON.stringify(databuku));
+    
+                    // menampilkan pesan pemberitahuan bahwa buku berhasil di hapus
+                    messageDescription.textContent = "Buku Berhasil Di Hapus";
+                    messageimg.src = "icon/delete2.gif";
+                    messageimg.classList.add("h-40", "w-40");
+                    messageNotification.classList.remove("hidden");
+                    overlay.classList.remove("hidden");
+
+                    function delay(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+                    
+                    async function DelayRefresh() {
+                        // mereset kembali message notification
+                        setTimeout(() => {
+                            messageNotification.classList.add("hidden");
+                            messageimg.src = "icon/centang.gif";
+                            messageimg.classList = [];
+                            messageimg.classList.add("h-24", "w-24");
+                            overlay.classList.add("hidden");
+                        }, 3000);
+                    
+                        // Menunggu 3 detik menggunakan async/await
+                        await delay(3000);
+                        
+                        SearchInput.value = "";
+                        if (SearchInput.value === "") {
+                            searchBook();
+                        }
+                    }
+                    
+                    DelayRefresh();
+                } else {
+                    console.log("Buku tidak ditemukan");
+                }
+            });
+        });
+    };
+
+    SearchDeleteBtn();
+}

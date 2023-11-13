@@ -73,6 +73,8 @@ function SearchBookComponent(title, author, year, isComplete, id) {
     buttonContainer.className = "flex flex-row gap-5 justify-center items-center";
 
     const deleteButton = document.createElement("div");
+    deleteButton.classList.add("delbtn")
+    deleteButton.id = id;
     deleteButton.innerHTML = `
         <figure class="h-10 w-10 bg-red-200 flex justify-center items-center rounded-full cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="red">
@@ -84,11 +86,11 @@ function SearchBookComponent(title, author, year, isComplete, id) {
     const readAgainButton = document.createElement("div");
     if(!isComplete) {
         readAgainButton.innerHTML = `
-        <button class="text-white p-2 rounded-md bg-gradient-to-br from-blue-600 to-sky-400 mr-3 cardbook">Selesai Dibaca</button>
+        <button id=${id} class="text-white p-2 rounded-md bg-gradient-to-br from-blue-600 to-sky-400 mr-3 cardbook">Selesai Dibaca</button>
         `;
     }else {
         readAgainButton.innerHTML = `
-        <button class="text-white p-2 rounded-md bg-gradient-to-br from-blue-600 to-sky-400 mr-3 cardbook">Baca Ulang</button>
+        <button id=${id} class="text-white p-2 rounded-md bg-gradient-to-br from-blue-600 to-sky-400 mr-3 cardbook">Baca Ulang</button>
         `;
     }
 

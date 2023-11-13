@@ -31,7 +31,7 @@ function MessageNotif() {
     const h1 = document.createElement('h1');
     h1.id = 'descriptionmsg';
     h1.className = 'text-center font-bold text-lg';
-    h1.textContent = '--';
+    h1.textContent = '';
 
     // Gabungkan elemen-elemen
     section2.appendChild(h1);

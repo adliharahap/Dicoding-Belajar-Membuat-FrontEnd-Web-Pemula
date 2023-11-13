@@ -67,6 +67,18 @@
             <div id="containerbookcard" class="w-11/12 h-auto m-auto flex flex-col md:flex-row md:gap-4 md:flex-wrap md:w-full md:justify-center lg:justify-start lg:px-4">
                 <!-- book card -->
                 
+
+                <!-- overlay buku tidak ditemukan -->
+                <div id="booknotfound" class="hidden h-auto min-h-[600px] w-11/12 m-auto bg-white rounded-md shadow-md">
+                    <div class=" flex flex-col justify-center items-center">
+                        <figure class="pt-10">
+                            <img class="h-80 w-80 lg:h-96 lg:w-96" src="img/booknotfound.jpeg" alt="book-not-found.jpeg">
+                        </figure>
+                        <div class="mt-8 mx-4 text-center">
+                            <p class="text-lg lg:text-2xl font-medium">Oops, Sepertinya Buku Dengan Nama <span id="bookresult" class="text-sky-600"></span> Tidak Ditemukan</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- form add buku -->
