@@ -16,6 +16,7 @@ const clearSearchInput =  document.getElementById("deleteinput");
 const overlay = document.getElementById("overlay");
 const bookNotFound = document.getElementById("booknotfound");
 const BookValue = document.getElementById("bookresult");
+const emptyBook = document.getElementById("emptybook");
 
 // ketika navbar buku sls dibaca di klik
 BukuSlsDibaca.addEventListener("click", (e) => {
@@ -42,6 +43,13 @@ closeFormBook.addEventListener("click", (e) => {
     formBook.style.display = "none";
     ShowFormBook.style.display = "block";
 });
+
+// function menampilkan pesan kalau buku kosong
+function BookEmpty() {
+    emptyBook.classList.remove("hidden");
+    const bookmessage = emptyBook.outerHTML;
+    containerBookCard.innerHTML = bookmessage;
+}
 
 // fungsi untuk membuat buku selesai dibaca
 function bookDoneReadBtn() {
@@ -210,6 +218,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         });
     } else {
         console.log("data kosong");
+        BookEmpty();
     }
 
     bookDoneReadBtn();
@@ -228,17 +237,22 @@ function showBukuSlsDibaca() {
         const BookData = JSON.parse(getBookData);
 
         if (BookData && BookData.length) {
-            const mappingBook = BookData.map((book) => {
-                if (book.isComplete) {
-                createBookCard(book.title, book.author, book.year, book.isComplete, book.id);
-                }
-            });
-
-        // Setel flag menjadi true setelah komponen ditambahkan
-        isComponentAdded = true;
-        isComponentAdded2 = false;
+            if (BookData.some(book => book.isComplete === true)) {
+                const mappingBook = BookData.map((book) => {
+                    if (book.isComplete) {
+                    createBookCard(book.title, book.author, book.year, book.isComplete, book.id);
+                    }
+                });
+            } else {
+                console.log('Semua buku telah selesai dibaca atau tidak ada buku');
+                BookEmpty();
+            }
+            // Setel flag menjadi true setelah komponen ditambahkan
+            isComponentAdded = true;
+            isComponentAdded2 = false;
         } else {
             console.log("data kosong");
+            BookEmpty();
         }
 
         // function mengupdate data buku menjadi dibaca ulang
@@ -258,17 +272,23 @@ function showBukuBlmDibaca() {
         const BookData = JSON.parse(getBookData);
 
         if (BookData && BookData.length) {
-            const mappingBook = BookData.map((book) => {
-                if (!book.isComplete) {
-                createBookCard(book.title, book.author, book.year, book.isComplete, book.id);
-                }
-            });
+            if (BookData.some(book => book.isComplete === false)) {
+                const mappingBook = BookData.map((book) => {
+                    if (!book.isComplete) {
+                    createBookCard(book.title, book.author, book.year, book.isComplete, book.id);
+                    }
+                });
+            } else {
+                console.log('Semua buku telah selesai dibaca atau tidak ada buku');
+                BookEmpty();
+            }
 
-        // Setel flag menjadi true setelah komponen ditambahkan
-        isComponentAdded2 = true;
-        isComponentAdded = false;
+            // Setel flag menjadi true setelah komponen ditambahkan
+            isComponentAdded2 = true;
+            isComponentAdded = false;
         } else {
             console.log("data kosong");
+            BookEmpty();
         }
 
         // function mengupdate data buku menjadi selesai dibaca
@@ -293,6 +313,7 @@ function formSubmited() {
     JudulBuku.value = "";
     AuthorBuku.value = "";
     TahunBuku.value = "";
+    emptyBook.classList.add("hidden");
 
     try {
         if(BukuSlsDibaca.classList.contains("nav-active")) {
@@ -334,10 +355,10 @@ function searchBook() {
     const inputValue = SearchInput.value;
 
     function BookNotFoundMessage(value) {
+        bookNotFound.classList.remove("hidden");
         BookValue.textContent = value;
         const bookcomponent = bookNotFound.outerHTML;
         containerBookCard.innerHTML = bookcomponent;
-        bookNotFound.classList.remove("hidden");
     }
 
     if (inputValue.length >= 1) {
